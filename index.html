@@ -901,6 +901,82 @@
     slides.forEach(function(s) { obs.observe(s); });
   })();
 </script>
+<!-- ── Visitor & FAQ tracking ───────────────────────────── -->
+<script>
+(function() {
+  var ENDPOINT   = 'YOUR_WEBAPP_URL';
+  var visitStart = Date.now();
+  var geoData    = {};
 
+  // ── 1. Get visitor location, then log page visit ──────
+  fetch('https://ipapi.co/json/')
+    .then(function(r){ return r.json(); })
+    .then(function(geo){
+      geoData = { city: geo.city, region: geo.region, country: geo.country_name };
+      logEvent('visit', '', null);
+    })
+    .catch(function(){ logEvent('visit', '', null); });
+
+  // ── 2. Track FAQ accordion opens ─────────────────────
+  //  Handles both <details>/<summary> and click-based accordions.
+  //  Adjust the selector if your FAQ uses different class names.
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // Native <details> elements
+    document.querySelectorAll('details').forEach(function(el) {
+      el.addEventListener('toggle', function() {
+        if (this.open) {
+          var q = this.querySelector('summary');
+          logEvent('faq_open', q ? q.textContent.trim() : 'FAQ opened', null);
+        }
+      });
+    });
+
+    // Click-based accordions (common patterns)
+    var faqTriggers = document.querySelectorAll(
+      '.faq-question, .faq-toggle, [data-faq], .accordion-header, .accordion-button'
+    );
+    faqTriggers.forEach(function(el) {
+      el.addEventListener('click', function() {
+        var q = this.textContent.trim();
+        logEvent('faq_open', q, null);
+      });
+    });
+  });
+
+  // ── 3. Log session duration on exit ──────────────────
+  window.addEventListener('beforeunload', function() {
+    var secs = Math.round((Date.now() - visitStart) / 1000);
+    logEvent('session_end', '', secs);
+  });
+
+  // ── Core sender ───────────────────────────────────────
+  function logEvent(event, faqQuestion, duration) {
+    var payload = {
+      type:        'visitor',
+      event:       event,
+      faqQuestion: faqQuestion || '',
+      duration:    duration    || '',
+      city:        geoData.city    || '',
+      region:      geoData.region  || '',
+      country:     geoData.country || '',
+      userAgent:   navigator.userAgent,
+      referrer:    document.referrer,
+      page:        window.location.href
+    };
+    // sendBeacon survives the page closing (for session_end)
+    if (event === 'session_end' && navigator.sendBeacon) {
+      navigator.sendBeacon(ENDPOINT, JSON.stringify(payload));
+    } else {
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body:   JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' }
+      }).catch(function(){});
+    }
+  }
+
+})();
+</script>
 </body>
 </html>
