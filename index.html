@@ -800,162 +800,36 @@
 
 <!-- ── SCRIPTS ───────────────────────────────────────── -->
 <script>
-  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwDoPosZ7712dn6QzfEADDgC1ARGgqAjp8nxUIt04BpIfMrq4FAQ2KqzHLzbt110o0hg/exec';
-
-  /* ── Lead form (Request Info / Schedule a Showing) ── */
-  function submitLead(e) {
-    e.preventDefault();
-    var form = e.target;
-    var msg  = document.getElementById('leadMsg');
-    var btn  = form.querySelector('.form-submit');
-
-    // Collect field values — note: "leadName" avoids conflict with form.name property
-    var leadName = form.elements['leadName'].value.trim();
-    var phone    = form.elements['phone'].value.trim();
-    var email    = form.elements['email'].value.trim();
-    var interest = form.elements['interest'].value;
-
-    btn.disabled = true; btn.textContent = 'Sending\u2026';
-    msg.className = 'form-msg'; msg.textContent = '';
-
-    fetch(SHEET_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type:      'lead',
-        name:      leadName,
-        phone:     phone,
-        email:     email,
-        interest:  interest,
-        userAgent: navigator.userAgent,
-        referrer:  document.referrer || 'direct',
-        page:      window.location.href
-      })
-    }).then(function() {
-      msg.className = 'form-msg success';
-      msg.textContent = '\u2713 Request received \u2014 Steven will be in touch shortly.';
-      form.reset();
-    }).catch(function() {
-      msg.className = 'form-msg error';
-      msg.textContent = 'Could not send. Please call or text directly.';
-    }).finally(function() {
-      btn.disabled = false; btn.textContent = 'Send Request';
-    });
-  }
-
-  /* ── Question form ── */
-  function submitQuestion(e) {
-    e.preventDefault();
-    var form = e.target;
-    var msg  = document.getElementById('questionMsg');
-    var btn  = form.querySelector('.form-submit');
-
-    btn.disabled = true; btn.textContent = 'Sending\u2026';
-    msg.className = 'form-msg'; msg.textContent = '';
-
-    fetch(SHEET_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type:      'question',
-        question:  form.elements['question'].value.trim(),
-        name:      form.elements['qname'].value.trim(),
-        contact:   form.elements['qcontact'].value.trim(),
-        userAgent: navigator.userAgent,
-        referrer:  document.referrer || 'direct',
-        page:      window.location.href
-      })
-    }).then(function() {
-      msg.className = 'form-msg success';
-      msg.textContent = '\u2713 Question sent \u2014 we\'ll reply directly.';
-      form.reset();
-    }).catch(function() {
-      msg.className = 'form-msg error';
-      msg.textContent = 'Could not send. Please call or text directly.';
-    }).finally(function() {
-      btn.disabled = false; btn.textContent = 'Send My Question';
-    });
-  }
-
-  /* ── Gallery dots ── */
-  (function() {
-    var track   = document.getElementById('galleryTrack');
-    var dotsEl  = document.getElementById('galleryDots');
-    var slides  = track ? Array.from(track.querySelectorAll('.gallery-slide')) : [];
-    if (!slides.length) return;
-
-    slides.forEach(function(_, i) {
-      var d = document.createElement('div');
-      d.className = 'dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', function() {
-        slides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-      });
-      dotsEl.appendChild(d);
-    });
-
-    var dots = Array.from(dotsEl.querySelectorAll('.dot'));
-    var obs  = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var idx = slides.indexOf(entry.target);
-          dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
-        }
-      });
-    }, { root: track, threshold: 0.6 });
-
-    slides.forEach(function(s) { obs.observe(s); });
-  })();
-</script>
-<!-- ── Visitor & FAQ tracking ───────────────────────────── -->
-<script>
 (function() {
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzwDoPosZ7712dn6QzfEADDgC1ARGgqAjp8nxUIt04BpIfMrq4FAQ2KqzHLzbt110o0hg/exec';
+  var ENDPOINT   = 'https://script.google.com/macros/s/AKfycbzwDoPosZ7712dn6QzfEADDgC1ARGgqAjp8nxUIt04BpIfMrq4FAQ2KqzHLzbt110o0hg/exec';
   var visitStart = Date.now();
   var geoData    = {};
 
-  // ── 1. Get visitor location, then log page visit ──────
+  // Get location then log page visit
   fetch('https://ipapi.co/json/')
     .then(function(r){ return r.json(); })
     .then(function(geo){
       geoData = { city: geo.city, region: geo.region, country: geo.country_name };
-      logEvent('visit', '', null);
+      logEvent('Page Visit', '', null);
     })
-    .catch(function(){ logEvent('visit', '', null); });
+    .catch(function(){ logEvent('Page Visit', '', null); });
 
-  // ── 2. Track FAQ accordion opens ─────────────────────
-  //  Handles both <details>/<summary> and click-based accordions.
-  //  Adjust the selector if your FAQ uses different class names.
-  document.addEventListener('DOMContentLoaded', function() {
-
-    // Native <details> elements
-    document.querySelectorAll('details').forEach(function(el) {
-      el.addEventListener('toggle', function() {
-        if (this.open) {
-          var q = this.querySelector('summary');
-          logEvent('faq_open', q ? q.textContent.trim() : 'FAQ opened', null);
-        }
-      });
-    });
-
-    // Click-based accordions (common patterns)
-    var faqTriggers = document.querySelectorAll(
-      '.faq-question, .faq-toggle, [data-faq], .accordion-header, .accordion-button'
-    );
-    faqTriggers.forEach(function(el) {
-      el.addEventListener('click', function() {
-        var q = this.textContent.trim();
-        logEvent('faq_open', q, null);
-      });
+  // FAQ tracking — runs immediately (script is at bottom of body, DOM is ready)
+  document.querySelectorAll('details').forEach(function(el) {
+    el.addEventListener('toggle', function() {
+      if (this.open) {
+        var q = this.querySelector('summary');
+        logEvent('FAQ Viewed', q ? q.textContent.trim() : 'FAQ opened', null);
+      }
     });
   });
 
-  // ── 3. Log session duration on exit ──────────────────
+  // Session duration on exit
   window.addEventListener('beforeunload', function() {
     var secs = Math.round((Date.now() - visitStart) / 1000);
-    logEvent('session_end', '', secs);
+    logEvent('Visit Completed', '', secs);
   });
 
-  // ── Core sender ───────────────────────────────────────
   function logEvent(event, faqQuestion, duration) {
     var payload = {
       type:        'visitor',
@@ -969,8 +843,7 @@
       referrer:    document.referrer,
       page:        window.location.href
     };
-    // sendBeacon survives the page closing (for session_end)
-    if (event === 'session_end' && navigator.sendBeacon) {
+    if (event === 'Visit Completed' && navigator.sendBeacon) {
       navigator.sendBeacon(ENDPOINT, JSON.stringify(payload));
     } else {
       fetch(ENDPOINT, {
@@ -980,7 +853,6 @@
       }).catch(function(){});
     }
   }
-
 })();
 </script>
 </body>
