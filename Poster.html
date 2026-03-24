@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>427 Howland Canal — Open House Sign-In Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Jura:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  @page {
+    size: 20in 20in;
+    margin: 0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:  #243b5d;
+    --cream: #f0ebe0;
+    --gold:  #c5a56c;
+    --light: #e8e2d6;
+    --mid:   #7a96b0;
+    --white: #faf8f4;
+  }
+
+  html, body {
+    width: 20in;
+    height: 20in;
+    background: var(--cream);
+    font-family: 'Instrument Sans', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .poster {
+    width: 20in;
+    height: 20in;
+    display: grid;
+    grid-template-rows: 1.1in 1fr 0.75in;
+    grid-template-columns: 1fr;
+    background: var(--cream);
+  }
+
+  /* ── TOP HEADER BAND ── */
+  .header {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1in;
+    padding: 0 1in;
+  }
+  .header .brand {
+    font-family: 'Jura', sans-serif;
+    font-weight: 400;
+    font-size: 0.18in;
+    letter-spacing: 0.12in;
+    text-transform: uppercase;
+    color: rgba(240,235,224,0.65);
+  }
+  .header .address {
+    font-family: 'Italiana', serif;
+    font-size: 0.55in;
+    color: var(--gold);
+    letter-spacing: 0.02in;
+    line-height: 1;
+  }
+  .header .tagline {
+    font-family: 'Jura', sans-serif;
+    font-weight: 300;
+    font-size: 0.155in;
+    letter-spacing: 0.08in;
+    text-transform: uppercase;
+    color: rgba(240,235,224,0.5);
+  }
+
+  /* ── BODY: TWO COLUMNS ── */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  /* ── LEFT: QR COLUMN ── */
+  .qr-col {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8in;
+    gap: 0.4in;
+    position: relative;
+  }
+  .qr-col::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0.6in; bottom: 0.6in;
+    width: 1px;
+    background: rgba(197,165,108,0.25);
+  }
+
+  .qr-label-top {
+    font-family: 'Jura', sans-serif;
+    font-weight: 300;
+    font-size: 0.16in;
+    letter-spacing: 0.1in;
+    text-transform: uppercase;
+    color: rgba(197,165,108,0.7);
+    text-align: center;
+  }
+
+  .qr-wrapper {
+    background: var(--white);
+    padding: 0.35in;
+    border: 0.02in solid rgba(197,165,108,0.3);
+  }
+
+  #qrcode canvas, #qrcode img {
+    display: block;
+  }
+
+  .qr-instruction {
+    font-family: 'Italiana', serif;
+    font-size: 0.42in;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1.15;
+  }
+  .qr-sub {
+    font-family: 'Jura', sans-serif;
+    font-weight: 300;
+    font-size: 0.155in;
+    color: rgba(240,235,224,0.55);
+    text-align: center;
+    letter-spacing: 0.04in;
+  }
+
+  /* ── RIGHT: INFO COLUMN ── */
+  .info-col {
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.9in 1in 0.9in 0.8in;
+    gap: 0;
+  }
+
+  .visit-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Jura', sans-serif;
+    font-weight: 500;
+    font-size: 0.155in;
+    letter-spacing: 0.07in;
+    text-transform: uppercase;
+    padding: 0.07in 0.2in;
+    margin-bottom: 0.35in;
+    align-self: flex-start;
+  }
+
+  .info-headline {
+    font-family: 'Italiana', serif;
+    font-size: 0.72in;
+    color: var(--navy);
+    line-height: 1.05;
+    margin-bottom: 0.12in;
+  }
+  .gold-rule {
+    width: 0.65in;
+    height: 0.025in;
+    background: var(--gold);
+    margin-bottom: 0.45in;
+  }
+
+  .section-label {
+    font-family: 'Jura', sans-serif;
+    font-weight: 500;
+    font-size: 0.14in;
+    letter-spacing: 0.07in;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.18in;
+  }
+
+  .item-list {
+    list-style: none;
+    margin-bottom: 0.5in;
+  }
+  .item-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.18in;
+    margin-bottom: 0.18in;
+  }
+  .bullet {
+    width: 0.1in;
+    height: 0.1in;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.04in;
+  }
+  .item-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.22in;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+  .item-text em {
+    display: block;
+    font-style: normal;
+    font-size: 0.165in;
+    color: var(--mid);
+    margin-top: 0.03in;
+    font-weight: 300;
+  }
+
+  .privacy-note {
+    font-family: 'Jura', sans-serif;
+    font-weight: 300;
+    font-size: 0.145in;
+    color: rgba(36,59,93,0.45);
+    line-height: 1.5;
+    letter-spacing: 0.02in;
+    border-top: 1px solid rgba(197,165,108,0.3);
+    padding-top: 0.28in;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.8in;
+    border-top: 0.025in solid var(--gold);
+  }
+  .footer-agent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.04in;
+  }
+  .footer-name {
+    font-family: 'Italiana', serif;
+    font-size: 0.3in;
+    color: var(--cream);
+    letter-spacing: 0.01in;
+  }
+  .footer-lic {
+    font-family: 'Jura', sans-serif;
+    font-weight: 300;
+    font-size: 0.14in;
+    color: rgba(197,165,108,0.7);
+    letter-spacing: 0.04in;
+  }
+  .footer-divider {
+    width: 1px;
+    height: 0.3in;
+    background: rgba(197,165,108,0.3);
+  }
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.04in;
+  }
+  .footer-phone {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.28in;
+    color: var(--gold);
+    letter-spacing: 0.02in;
+  }
+  .footer-email {
+    font-family: 'Jura', sans-serif;
+    font-weight: 300;
+    font-size: 0.155in;
+    color: rgba(240,235,224,0.55);
+    letter-spacing: 0.02in;
+  }
+
+  @media print {
+    html, body { width: 20in; height: 20in; }
+    .poster { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- HEADER -->
+  <div class="header">
+    <p class="brand">Spaces &amp; Beyond®</p>
+    <p class="address">427 Howland Canal &nbsp;·&nbsp; Venice, California</p>
+    <p class="tagline">Private Canal-Front Residence</p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- LEFT: QR -->
+    <div class="qr-col">
+      <p class="qr-label-top">Scan to Register</p>
+      <div class="qr-wrapper">
+        <div id="qrcode"></div>
+      </div>
+      <p class="qr-instruction">Point your camera<br>here to sign in</p>
+      <p class="qr-sub">No app required &nbsp;·&nbsp; Opens in your browser</p>
+    </div>
+
+    <!-- RIGHT: INFO -->
+    <div class="info-col">
+      <span class="visit-badge">Open House</span>
+      <p class="info-headline">Welcome<br>to 427</p>
+      <div class="gold-rule"></div>
+
+      <p class="section-label">When you scan, you will</p>
+      <ul class="item-list">
+        <li>
+          <div class="bullet"></div>
+          <span class="item-text">Sign in with your name &amp; contact
+            <em>Takes under 30 seconds</em>
+          </span>
+        </li>
+        <li>
+          <div class="bullet"></div>
+          <span class="item-text">Select your interest — Buying, Leasing, or Both
+            <em>Helps Steven prepare follow-up for you</em>
+          </span>
+        </li>
+        <li>
+          <div class="bullet"></div>
+          <span class="item-text">Receive property details by email
+            <em>Floor plan, spec sheet &amp; pricing info</em>
+          </span>
+        </li>
+        <li>
+          <div class="bullet"></div>
+          <span class="item-text">Get direct access to Steven Bettencourt
+            <em>Your agent for questions &amp; private showings</em>
+          </span>
+        </li>
+      </ul>
+
+      <p class="privacy-note">Your information is private and used only to follow up<br>
+      regarding 427 Howland Canal. It will never be shared.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-agent">
+      <p class="footer-name">Steven Bettencourt</p>
+      <p class="footer-lic">DRE Lic. #02225787 &nbsp;·&nbsp; Spaces &amp; Beyond®</p>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-contact">
+      <p class="footer-phone">310-433-8281</p>
+      <p class="footer-email">steven@spacesandbeyond.com</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var qr = new QRCode(document.getElementById('qrcode'), {
+    text:         'https://427howlandcanal.com/signin.html?type=openhouse',
+    width:        560,
+    height:       560,
+    colorDark:    '#243b5d',
+    colorLight:   '#faf8f4',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
+</body>
+</html>
