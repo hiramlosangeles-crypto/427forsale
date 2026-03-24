@@ -49,6 +49,12 @@
       color: var(--gold);
       letter-spacing: 1px;
     }
+    header .address .num {
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
     header .visit-type {
       font-size: 10px;
       letter-spacing: 2.5px;
@@ -223,7 +229,7 @@
 
 <header>
   <p class="brand">Spaces &amp; Beyond®</p>
-  <p class="address">427 Howland Canal</p>
+  <p class="address"><span class="num">427</span> Howland Canal</p>
   <div class="rule" style="margin-top:6px;"></div>
   <p class="visit-type" id="visitTypeLabel">Visitor Sign-In</p>
 </header>
@@ -303,8 +309,8 @@
 
   // Read visit type from URL: ?type=openhouse OR ?type=showing
   var params   = new URLSearchParams(window.location.search);
-  var visitType = params.get('type') || 'showing';
-  var isOpenHouse = visitType === 'openhouse';
+  var visitType = params.get('type') || 'openhouse';
+  var isOpenHouse = visitType !== 'showing';
 
   // Update labels
   document.getElementById('visitTypeLabel').textContent =
