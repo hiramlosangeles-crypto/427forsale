@@ -444,6 +444,28 @@
       text-transform: uppercase; color: var(--blue-soft); line-height: 2;
     }
     .site-footer a { color: var(--blue-soft); }
+    /* ── DAY PICKER ── */
+    .day-picker { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .day-btn {
+      flex: 1 1 calc(25% - 10px); min-width: 64px;
+      padding: 14px 8px; text-align: center;
+      background: var(--cream-dark); border: 1.5px solid rgba(197,165,108,0.4);
+      border-radius: 3px; font-family: var(--sans); font-size: 14px; font-weight: 600;
+      color: var(--navy); cursor: pointer; transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent; user-select: none;
+    }
+    .day-btn.selected {
+      background: var(--navy); color: var(--cream); border-color: var(--navy);
+    }
+    .day-btn:active { opacity: 0.75; }
+    /* ── FOLLOW-UP NOTE ── */
+    .followup-note {
+      margin-top: 10px; padding: 12px 14px;
+      background: var(--cream-dark); border-left: 3px solid var(--gold);
+      border-radius: 0 3px 3px 0;
+      font-family: var(--sans); font-size: 13px; font-style: italic;
+      color: var(--blue-soft); line-height: 1.5;
+    }
     /* ── STICKY BOTTOM BAR ── */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
@@ -640,6 +662,23 @@
         <option value="Just browsing">Just browsing</option>
       </select>
     </div>
+    <div class="form-row">
+      <label>Best Days</label>
+      <div class="day-picker" id="dayPicker">
+        <button type="button" class="day-btn" data-day="Mon">Mon</button>
+        <button type="button" class="day-btn" data-day="Tue">Tue</button>
+        <button type="button" class="day-btn" data-day="Wed">Wed</button>
+        <button type="button" class="day-btn" data-day="Thu">Thu</button>
+        <button type="button" class="day-btn" data-day="Fri">Fri</button>
+        <button type="button" class="day-btn" data-day="Sat">Sat</button>
+        <button type="button" class="day-btn" data-day="Sun">Sun</button>
+      </div>
+    </div>
+    <div class="followup-note">Based on the days you selected, we'll follow up with available time options.</div>
+    <div class="form-row" style="margin-top:14px;">
+      <label>Notes</label>
+      <textarea name="notes" placeholder="Any questions or details you'd like us to know…"></textarea>
+    </div>
     <button type="submit" class="form-submit">Send Request</button>
     <div class="form-msg" id="leadMsg"></div>
   </form>
@@ -788,6 +827,8 @@
       phone:     form.elements['phone'].value.trim(),
       email:     form.elements['email'].value.trim(),
       interest:  form.elements['interest'].value,
+      bestDays:  Array.from(document.querySelectorAll('#dayPicker .day-btn.selected')).map(function(b){ return b.dataset.day; }).join(', '),
+      notes:     form.elements['notes'].value.trim(),
       userAgent: navigator.userAgent,
       referrer:  document.referrer,
       page:      window.location.href
@@ -812,6 +853,12 @@
       btn.textContent  = 'Send Request';
     });
   }
+  // ── Day picker toggle ───────────────────────────
+  document.querySelectorAll('#dayPicker .day-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      this.classList.toggle('selected');
+    });
+  });
   // ── Phone auto-format: (310) 555-0000 ──────────
   var phoneInput = document.querySelector('[name="phone"]');
   if (phoneInput) {
