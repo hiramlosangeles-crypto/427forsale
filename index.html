@@ -95,7 +95,7 @@
     }
     /* ── HERO ── */
     .hero {
-      position: relative; height: 68vw; min-height: 240px;
+      position: relative; height: 80vw; min-height: 300px; max-height: 520px;
       overflow: hidden; background: var(--navy);
     }
     .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.92; }
@@ -109,17 +109,20 @@
     }
     .hero-overlay {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(36,59,93,0.9) 0%, transparent 100%);
-      padding: 36px 20px 18px;
+      background: linear-gradient(to top, rgba(36,59,93,0.92) 0%, rgba(36,59,93,0.35) 60%, transparent 100%);
+      padding: 28px 20px 22px;
+      display: flex; flex-direction: column; justify-content: flex-end;
     }
     .hero-address {
       font-family: var(--serif);
-      font-size: clamp(22px, 6.4vw, 33px);
-      font-weight: 600; color: #fff; line-height: 1.2;
+      font-size: clamp(28px, 7.5vw, 42px);
+      font-weight: 600; color: #fff; line-height: 1.15;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.4);
     }
     .hero-sub {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--gold); margin-top: 5px;
+      font-family: var(--sans); font-size: 15px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); margin-top: 8px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     }
     /* ── PRICE BLOCK ── */
     .price-hero {
@@ -490,24 +493,22 @@
     /* 1. Hero CTA button */
     .hero-cta-wrap {
       display: flex; flex-direction: column; align-items: flex-start;
-      gap: 7px; margin-top: 14px;
+      gap: 0; margin-top: 20px;
     }
     .btn-hero-showing {
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
       background: var(--gold); color: var(--navy);
-      font-family: var(--sans); font-size: 11px; font-weight: 700;
-      letter-spacing: 2.5px; text-transform: uppercase;
-      border: none; border-radius: 3px;
-      padding: 13px 22px; min-height: 46px; cursor: pointer;
+      font-family: var(--sans); font-size: 15px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      border: none; border-radius: 4px;
+      padding: 18px 24px; min-height: 54px; cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       transition: opacity 0.15s, transform 0.15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     }
     .btn-hero-showing:hover { opacity: 0.88; transform: translateY(-1px); }
     .btn-hero-showing:active { opacity: 0.75; transform: translateY(0); }
-    .hero-cta-micro {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 1px;
-      color: rgba(245,240,232,0.5);
-    }
+    .hero-cta-micro { display: none; }
 
     /* 2. Interest toggle pills (replaces <select>) */
     .interest-pills {
@@ -674,7 +675,7 @@
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         Schedule a Private Visit
       </button>
-      <p class="hero-cta-micro">Most requests receive a response within 2 hours</p>
+
     </div>
   </div>
 </section>
