@@ -492,8 +492,8 @@
 
     /* 1. Hero CTA button */
     .hero-cta-wrap {
-      display: flex; flex-direction: column; align-items: flex-start;
-      gap: 0; margin-top: 20px;
+      display: inline-flex; flex-direction: column; align-items: flex-start;
+      gap: 8px; margin-top: 16px;
     }
     .btn-hero-showing {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -636,6 +636,42 @@
       -webkit-tap-highlight-color: transparent; cursor: pointer;
       background: none; border: none;
     }
+
+    /* ── OFF-MARKET BADGE ── */
+    .off-market-hero {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(197,165,108,0.15);
+      border: 1px solid rgba(197,165,108,0.5);
+      border-radius: 3px;
+      padding: 6px 12px;
+    }
+    .off-market-hero-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+    .off-market-hero-text {
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .off-market-price-bar {
+      grid-column: 1 / -1;
+      background: var(--navy-deep);
+      padding: 11px 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(197,165,108,0.3);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .off-market-price-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+    .off-market-price-text {
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold);
+    }
   </style>
 </head>
 <body>
@@ -671,16 +707,24 @@
     <div class="hero-address">427 Howland Canal<br>Venice, California</div>
     <div class="hero-sub" style="color:#f0ece4;">Private showings by appointment</div>
     <div class="hero-cta-wrap">
+      <div class="off-market-hero">
+        <div class="off-market-hero-dot"></div>
+        <span class="off-market-hero-text">Off-Market · Not Listed on MLS</span>
+      </div>
       <button class="btn-hero-showing" onclick="document.getElementById('showing-anchor').scrollIntoView({behavior:'smooth'})">
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         Schedule a Private Visit
       </button>
-
     </div>
   </div>
 </section>
 <!-- ── PRICES ── -->
-<div class="price-hero">
+<div class="price-hero" style="grid-template-columns:1fr 1fr; display:grid;">
+  <div class="off-market-price-bar">
+    <div class="off-market-price-dot"></div>
+    <span class="off-market-price-text">Off-Market Opportunity · Not Currently Listed on MLS</span>
+    <div class="off-market-price-dot"></div>
+  </div>
   <div class="ph-cell">
     <span class="ph-label">Purchase</span>
     <span class="ph-price ph-price-sale"><sup>$</sup>2,195,000</span>
@@ -769,12 +813,13 @@
     </details>
     <details>
       <summary>Are utilities included in the lease?</summary>
-      <div class="faq-answer">Utility terms are negotiable. Contact Steven directly to discuss what is included and confirm current lease conditions.</div>
+      <div class="faq-answer">Utilities are not included in the lease. The tenant is responsible for all utility costs.</div>
     </details>
     <details>
-      <summary>Who do I contact for more details?</summary>
-      <div class="faq-answer">Contact Steven Bettencourt directly at <a href="tel:3104338281" style="color:var(--gold-text);font-weight:600;">310-433-8281</a> or <a href="/cdn-cgi/l/email-protection#4b383f2e3d2e250b383b2a282e382a252f292e3224252f65282426" style="color:var(--gold-text);font-weight:600;"><span class="__cf_email__" data-cfemail="bbc8cfdecdded5fbc8cbdad8dec8dad5dfd9dec2d4d5df95d8d4d6">[email&#160;protected]</span></a>.</div>
+      <summary>Is the garage ADU ready?</summary>
+      <div class="faq-answer">Yes, it is.</div>
     </details>
+
   </div>
 </section>
 <hr class="divider-gold" />
@@ -862,10 +907,6 @@
     <div class="form-row" style="margin-top:14px;">
       <label>Notes</label>
       <textarea name="notes" placeholder="Any questions or details you'd like us to know…"></textarea>
-    </div>
-    <div class="response-badge">
-      <div class="response-badge-dot"></div>
-      <span>Most requests receive a response within 2 hours</span>
     </div>
     <button type="submit" class="form-submit form-submit-upgraded">Schedule My Visit</button>
     <div class="form-msg" id="leadMsg"></div>
