@@ -108,23 +108,39 @@
       font-family: var(--sans); letter-spacing: 3px; text-transform: uppercase;
     }
     .hero-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(20,35,55,0.85) 0%, rgba(20,35,55,0.3) 45%, transparent 70%);
-      padding: 18px 20px 20px;
-      display: flex; flex-direction: column; justify-content: flex-end;
+      position: absolute; bottom: 22px; left: 16px;
+      max-width: 85%;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
     }
     .hero-address {
       font-family: var(--serif);
-      font-size: clamp(28px, 7.5vw, 42px);
-      font-weight: 700; color: #fff; line-height: 1.2;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.8);
-      margin-bottom: 16px;
-      background: rgba(20,35,55,0.72);
+      font-size: clamp(22px, 5.5vw, 36px);
+      font-weight: 700; color: #fff; line-height: 1.25;
+      background: rgba(18,30,48,0.82);
       display: inline-block;
-      padding: 10px 16px 12px;
-      border-radius: 4px;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
+      padding: 12px 16px 14px;
+      border-radius: 3px;
+      border-left: 3px solid var(--gold);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .hero-off-market-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(18,30,48,0.80);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-left: 3px solid var(--gold);
+      padding: 7px 12px 7px 10px;
+      border-radius: 3px;
+    }
+    .hero-om-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #e8c47a; flex-shrink: 0;
+    }
+    .hero-om-text {
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 1.2px; text-transform: uppercase; color: #e8c47a;
+      white-space: nowrap;
     }
     .hero-sub {
       font-family: var(--sans); font-size: 15px; letter-spacing: 2px;
@@ -553,11 +569,27 @@
        CONVERSION UPGRADES — added for showing request
        ══════════════════════════════════════════════════ */
 
-    /* 1. Hero CTA button */
-    .hero-cta-wrap {
-      display: flex; flex-direction: column; align-items: flex-start;
-      gap: 8px; margin-top: 0;
+    /* 1. Hero CTA — button removed from inside hero, shown below image instead */
+    .hero-cta-wrap { display: none; }
+    /* Below-hero CTA strip */
+    .hero-cta-below {
+      background: var(--cream);
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(197,165,108,0.2);
     }
+    .btn-below-showing {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%;
+      background: var(--gold); color: var(--navy);
+      border: none;
+      font-family: var(--sans); font-size: 13px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 14px 24px; border-radius: 6px;
+      min-height: 50px; cursor: pointer;
+      -webkit-tap-highlight-color: transparent; user-select: none;
+      transition: opacity 0.15s;
+    }
+    .btn-below-showing:active { opacity: 0.82; }
     .btn-hero-showing {
       display: inline-flex; align-items: center; justify-content: center;
       background: var(--gold); color: var(--navy);
@@ -777,13 +809,26 @@
     </div>
   </div>
 </section>
+<!-- ── OFF-MARKET BAR ── -->
+<div class="off-market-price-bar">
+  <div class="off-market-price-dot"></div>
+  <span class="off-market-price-text">Off-Market Opportunity · Not Currently Listed on MLS</span>
+  <div class="off-market-price-dot"></div>
+</div>
+<!-- ── HERO CTA (below off-market bar) ── -->
+<div class="hero-cta-below">
+  <button class="btn-below-showing"
+          onclick="document.getElementById('showing-anchor').scrollIntoView({behavior:'smooth'})">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24"
+         stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+    </svg>
+    Schedule a Private Visit
+  </button>
+</div>
 <!-- ── PRICES ── -->
 <div class="price-hero" style="grid-template-columns:1fr 1fr; display:grid;">
-  <div class="off-market-price-bar">
-    <div class="off-market-price-dot"></div>
-    <span class="off-market-price-text">Off-Market Opportunity · Not Currently Listed on MLS</span>
-    <div class="off-market-price-dot"></div>
-  </div>
   <div class="ph-cell">
     <span class="ph-label">Purchase</span>
     <span class="ph-price ph-price-sale"><sup>$</sup>2,195,000</span>
@@ -868,12 +913,12 @@
 <section class="section">
   <h2 class="section-title">Imagery</h2>
   <div class="gallery-track" id="galleryTrack">
+    <div class="gallery-slide"><img src="images/exterior-front2C.jpg" alt="427 Howland Canal — Front exterior" loading="lazy" /></div>
+    <div class="gallery-slide"><img src="images/exterior-canal.jpg" alt="Venice Canal walkway view" loading="lazy" /></div>
+    <div class="gallery-slide"><img src="images/exterior-front.jpg" alt="Front entrance" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/kitchen-1.jpg" alt="Chef's kitchen — butcher block island" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/kitchen-2.jpg" alt="Kitchen — open layout toward living area" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/kitchen-3.jpg" alt="Kitchen — gas range, stainless appliances" loading="lazy" /></div>
-    <div class="gallery-slide"><img src="images/exterior-canal.jpg" alt="Venice Canal walkway view" loading="lazy" /></div>
-    <div class="gallery-slide"><img src="images/exterior-front.jpg" alt="Front entrance" loading="lazy" /></div>
-    <div class="gallery-slide"><img src="images/exterior-front2C.jpg" alt="Front exterior" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/bathroom.jpg" alt="Bathroom — round mirror, granite vanity" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/bedroom.jpg" alt="Bedroom — warm wood tones, natural light" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/courtyard.jpg" alt="Private courtyard" loading="lazy" /></div>
