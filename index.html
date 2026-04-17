@@ -30,6 +30,9 @@
   <meta name="twitter:description" content="427 Howland Canal · Venice, CA 90291" />
   <meta name="twitter:image" content="https://427howlandcanal.com/images/exterior-front.jpg" />
   <title>Private Showing – 427 Howland Canal</title>
+  <!-- Favicon — browser tab icon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -108,24 +111,39 @@
       font-family: var(--sans); letter-spacing: 3px; text-transform: uppercase;
     }
     .hero-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(20,35,55,0.85) 0%, rgba(20,35,55,0.3) 45%, transparent 70%);
-      padding: 18px 20px 20px;
-      display: flex; flex-direction: column; justify-content: flex-end;
+      position: absolute; bottom: 22px; left: 16px;
+      max-width: 85%;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
     }
     .hero-address {
       font-family: var(--serif);
-      font-size: clamp(26px, 6.5vw, 38px);
-      font-weight: 700; color: #fff; line-height: 1.2;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.8);
-      margin-bottom: 0;
-      background: rgba(20,35,55,0.72);
+      font-size: clamp(22px, 5.5vw, 36px);
+      font-weight: 700; color: #fff; line-height: 1.25;
+      background: rgba(18,30,48,0.82);
       display: inline-block;
-      align-self: flex-start;
-      padding: 10px 18px 13px;
-      border-radius: 4px;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
+      padding: 12px 16px 14px;
+      border-radius: 3px;
+      border-left: 3px solid var(--gold);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .hero-off-market-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(18,30,48,0.80);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-left: 3px solid var(--gold);
+      padding: 7px 12px 7px 10px;
+      border-radius: 3px;
+    }
+    .hero-om-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #e8c47a; flex-shrink: 0;
+    }
+    .hero-om-text {
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 1.2px; text-transform: uppercase; color: #e8c47a;
+      white-space: nowrap;
     }
     .hero-sub {
       font-family: var(--sans); font-size: 15px; letter-spacing: 2px;
@@ -223,6 +241,65 @@
       font-weight: 600; color: var(--navy-deep);
     }
     .spec-cell.full { grid-column: 1 / -1; }
+    /* ── SPEC SHEET CARDS ── */
+    .spec-sheets-row {
+      margin-top: 22px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .spec-card {
+      display: flex; align-items: stretch;
+      background: var(--cream-dark);
+      border: 1px solid rgba(197,165,108,0.4); border-radius: 4px;
+      overflow: hidden;
+    }
+    .spec-card-thumb {
+      width: 80px; flex-shrink: 0;
+      background: var(--navy-deep); overflow: hidden;
+    }
+    .spec-card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .spec-card-thumb.soon-thumb {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .spec-card-body {
+      flex: 1; padding: 13px 14px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+    }
+    .spec-card-meta { display: flex; flex-direction: column; gap: 3px; }
+    .spec-card-type {
+      font-family: var(--sans); font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold-text); font-weight: 700;
+    }
+    .spec-card-title {
+      font-family: var(--sans); font-size: 15px; font-weight: 600;
+      color: var(--navy-deep); line-height: 1.3;
+    }
+    .spec-card-btns { display: flex; gap: 8px; }
+    .btn-spec-view, .btn-spec-dl {
+      flex: 1; padding: 10px 6px; text-align: center;
+      font-family: var(--sans); font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      border-radius: 3px; cursor: pointer; min-height: 40px;
+      display: inline-flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent; text-decoration: none;
+    }
+    .btn-spec-view {
+      background: transparent; color: var(--navy);
+      border: 1.5px solid rgba(36,59,93,0.45);
+    }
+    .btn-spec-dl {
+      background: var(--navy); color: var(--cream);
+      border: 1.5px solid var(--navy);
+    }
+    .spec-card.soon { opacity: 0.5; pointer-events: none; }
+    .spec-card.soon .spec-card-btns { display: none; }
+    .spec-soon-note {
+      font-family: var(--sans); font-size: 12px;
+      color: var(--blue-soft); letter-spacing: 0.5px; font-style: italic;
+    }
     /* ── GALLERY ── */
     .gallery-track {
       display: flex; overflow-x: auto;
@@ -495,11 +572,41 @@
        CONVERSION UPGRADES — added for showing request
        ══════════════════════════════════════════════════ */
 
-    /* 1. Hero CTA button */
-    .hero-cta-wrap {
-      display: flex; flex-direction: column; align-items: flex-start;
-      gap: 8px; margin-top: 0;
+    /* 1. Hero CTA — button removed from inside hero, shown below image instead */
+    .hero-cta-wrap { display: none; }
+    /* Below-hero CTA strip */
+    .hero-cta-below {
+      background: var(--cream);
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(197,165,108,0.2);
+      display: flex; gap: 10px;
     }
+    .btn-below-showing {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      flex: 2;
+      background: var(--gold); color: var(--navy);
+      border: none;
+      font-family: var(--sans); font-size: 13px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 14px 16px; border-radius: 6px;
+      min-height: 52px; cursor: pointer;
+      -webkit-tap-highlight-color: transparent; user-select: none;
+      transition: opacity 0.15s;
+    }
+    .btn-below-showing:active { opacity: 0.82; }
+    .btn-open-house {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      flex: 1;
+      background: transparent; color: var(--navy);
+      border: 1.5px solid rgba(36,59,93,0.45);
+      font-family: var(--sans); font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 14px 10px; border-radius: 6px;
+      min-height: 52px; cursor: pointer;
+      -webkit-tap-highlight-color: transparent; user-select: none;
+      transition: opacity 0.15s; white-space: nowrap;
+    }
+    .btn-open-house:active { opacity: 0.7; }
     .btn-hero-showing {
       display: inline-flex; align-items: center; justify-content: center;
       background: var(--gold); color: var(--navy);
@@ -562,7 +669,7 @@
       color: #f0ece4; margin-bottom: 6px; line-height: 1.3;
     }
     .trust-bridge-sub {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px;
+      font-family: var(--sans); font-size: 13px; letter-spacing: 1.5px;
       text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
     }
     .trust-pills {
@@ -580,123 +687,9 @@
       background: var(--gold); flex-shrink: 0;
     }
     .trust-pill span {
-      font-family: var(--sans); font-size: 11px;
-      letter-spacing: 0.5px; color: rgba(240,236,228,0.7);
+      font-family: var(--sans); font-size: 13px;
+      letter-spacing: 0.5px; color: rgba(240,236,228,0.85);
     }
-
-    /* 4. Redesigned form section header */
-    .form-section-header {
-      text-align: center; padding: 28px 20px 0;
-      background: var(--cream);
-      border-top: 1px solid rgba(197,165,108,0.3);
-    }
-    .form-section-eyebrow {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--gold-text);
-      font-weight: 700; margin-bottom: 8px;
-    }
-    .form-section-headline {
-      font-family: var(--serif); font-size: 26px; font-weight: 600;
-      color: var(--navy); margin-bottom: 8px; line-height: 1.2;
-    }
-    .form-section-sub {
-      font-family: var(--sans); font-size: 12px; letter-spacing: 0.3px;
-      color: var(--blue-soft); line-height: 1.7; margin-bottom: 4px;
-    }
-    .form-gold-rule {
-      width: 36px; height: 2px; background: var(--gold);
-      margin: 14px auto 24px;
-    }
-
-    /* 5. Button copy upgrade + gold underline accent */
-    .form-submit-upgraded {
-      position: relative; overflow: hidden;
-    }
-    .form-submit-upgraded::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px; background: var(--gold);
-    }
-
-    /* 6. Response time badge above submit */
-    .response-badge {
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; margin-bottom: 10px;
-    }
-    .response-badge-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #4caf85; flex-shrink: 0;
-    }
-    .response-badge span {
-      font-family: var(--sans); font-size: 11px;
-      letter-spacing: 0.5px; color: var(--blue-soft);
-    }
-
-    /* 7. Sticky CTA — swap "Text Us" for "Schedule Showing" */
-    .cta-schedule {
-      color: var(--cream); flex: 1;
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; min-height: 58px; font-family: var(--sans);
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase;
-      -webkit-tap-highlight-color: transparent; cursor: pointer;
-      background: none; border: none;
-    }
-
-    /* ── OFF-MARKET BADGE ── */
-    .off-market-hero {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(20,35,55,0.82);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 3px 3px 0;
-      padding: 6px 12px 6px 10px;
-      max-width: 100%;
-    }
-    .off-market-hero-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #e8c47a; flex-shrink: 0;
-    }
-    .off-market-hero-text {
-      font-family: var(--sans); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.8px; text-transform: uppercase;
-      color: #e8c47a; white-space: nowrap;
-      text-shadow: none;
-    }
-
-
-    /* ── OPEN HOUSE / HERO CTA BELOW ── */
-    .hero-cta-below {
-      background: var(--cream);
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(197,165,108,0.2);
-      display: flex; gap: 10px;
-    }
-    .btn-below-showing {
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      flex: 2;
-      background: var(--gold); color: var(--navy);
-      border: none;
-      font-family: var(--sans); font-size: 13px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 14px 16px; border-radius: 6px;
-      min-height: 52px; cursor: pointer;
-      -webkit-tap-highlight-color: transparent; user-select: none;
-      transition: opacity 0.15s;
-    }
-    .btn-below-showing:active { opacity: 0.82; }
-    .btn-open-house {
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      flex: 1;
-      background: transparent; color: var(--navy);
-      border: 1.5px solid rgba(36,59,93,0.45);
-      font-family: var(--sans); font-size: 12px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      padding: 14px 10px; border-radius: 6px;
-      min-height: 52px; cursor: pointer;
-      -webkit-tap-highlight-color: transparent; user-select: none;
-      transition: opacity 0.15s; white-space: nowrap;
-    }
-    .btn-open-house:active { opacity: 0.7; }
 
     /* ── OPEN HOUSE SCHEDULE ── */
     .open-house-block {
@@ -743,64 +736,100 @@
       padding: 16px; font-style: italic;
     }
 
-    /* ── SPEC SHEET CARDS ── */
-    .spec-sheets-row {
-      margin-top: 22px;
-      display: flex; flex-direction: column; gap: 12px;
+    /* 4. Redesigned form section header */
+    .form-section-header {
+      text-align: center; padding: 28px 20px 0;
+      background: var(--cream);
+      border-top: 1px solid rgba(197,165,108,0.3);
     }
-    .spec-card {
-      display: flex; align-items: stretch;
-      background: var(--cream-dark);
-      border: 1px solid rgba(197,165,108,0.4); border-radius: 4px;
-      overflow: hidden;
+    .form-section-eyebrow {
+      font-family: var(--sans); font-size: 14px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--gold-text);
+      font-weight: 700; margin-bottom: 10px;
     }
-    .spec-card-thumb {
-      width: 80px; flex-shrink: 0;
-      background: var(--navy-deep); overflow: hidden;
+    .form-section-headline {
+      font-family: var(--serif); font-size: clamp(28px, 7vw, 36px); font-weight: 600;
+      color: var(--navy); margin-bottom: 10px; line-height: 1.2;
     }
-    .spec-card-thumb img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: top center;
-      display: block;
+    .form-section-sub {
+      font-family: var(--sans); font-size: 14px; letter-spacing: 0.3px;
+      color: var(--blue-soft); line-height: 1.7; margin-bottom: 4px;
     }
-    .spec-card-thumb.soon-thumb {
+    .form-gold-rule {
+      width: 36px; height: 2px; background: var(--gold);
+      margin: 14px auto 24px;
+    }
+
+    /* 5. Button copy upgrade + gold underline accent */
+    .form-submit-upgraded {
+      position: relative; overflow: hidden;
+    }
+    .form-submit-upgraded::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px; background: var(--gold);
+    }
+
+    /* 6. Response time badge above submit */
+    .response-badge {
       display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-bottom: 10px;
     }
-    .spec-card-body {
-      flex: 1; padding: 13px 14px;
-      display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+    .response-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #4caf85; flex-shrink: 0;
     }
-    .spec-card-meta { display: flex; flex-direction: column; gap: 3px; }
-    .spec-card-type {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--gold-text); font-weight: 700;
+    .response-badge span {
+      font-family: var(--sans); font-size: 11px;
+      letter-spacing: 0.5px; color: var(--blue-soft);
     }
-    .spec-card-title {
-      font-family: var(--sans); font-size: 15px; font-weight: 600;
-      color: var(--navy-deep); line-height: 1.3;
+
+    /* 7. Sticky CTA — swap "Text Us" for "Schedule Showing" */
+    .cta-schedule {
+      color: var(--cream); flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; min-height: 58px; font-family: var(--sans);
+      font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent; cursor: pointer;
+      background: none; border: none;
     }
-    .spec-card-btns { display: flex; gap: 8px; }
-    .btn-spec-view, .btn-spec-dl {
-      flex: 1; padding: 10px 6px; text-align: center;
-      font-family: var(--sans); font-size: 12px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      border-radius: 3px; cursor: pointer; min-height: 40px;
-      display: inline-flex; align-items: center; justify-content: center;
-      -webkit-tap-highlight-color: transparent; text-decoration: none;
+
+    /* ── OFF-MARKET BADGE ── */
+    .off-market-hero {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(20,35,55,0.82);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 3px 3px 0;
+      padding: 6px 12px 6px 10px;
+      max-width: 100%;
     }
-    .btn-spec-view {
-      background: transparent; color: var(--navy);
-      border: 1.5px solid rgba(36,59,93,0.45);
+    .off-market-hero-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #e8c47a; flex-shrink: 0;
     }
-    .btn-spec-dl {
-      background: var(--navy); color: var(--cream);
-      border: 1.5px solid var(--navy);
+    .off-market-hero-text {
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      color: #e8c47a; white-space: nowrap;
+      text-shadow: none;
     }
-    .spec-card.soon { opacity: 0.5; pointer-events: none; }
-    .spec-card.soon .spec-card-btns { display: none; }
-    .spec-soon-note {
-      font-family: var(--sans); font-size: 12px;
-      color: var(--blue-soft); letter-spacing: 0.5px; font-style: italic;
+    .off-market-price-bar {
+      grid-column: 1 / -1;
+      background: var(--navy-deep);
+      padding: 11px 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(197,165,108,0.3);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .off-market-price-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+    .off-market-price-text {
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold);
     }
   </style>
 </head>
@@ -835,9 +864,14 @@
   </div>
   <div class="hero-overlay">
     <div class="hero-address">427 Howland Canal<br>Venice, California</div>
+    <div class="hero-cta-wrap">
+      <button class="btn-hero-showing" onclick="document.getElementById('showing-anchor').scrollIntoView({behavior:'smooth'})">
+        Schedule a Private Visit
+      </button>
+    </div>
   </div>
 </section>
-<!-- ── HERO CTA BELOW ── -->
+<!-- ── HERO CTA ── -->
 <div class="hero-cta-below">
   <button class="btn-open-house"
           onclick="document.getElementById('showing-anchor').scrollIntoView({behavior:'smooth'})">
@@ -859,7 +893,7 @@
   </button>
 </div>
 <!-- ── PRICES ── -->
-<div class="price-hero">
+<div class="price-hero" style="grid-template-columns:1fr 1fr; display:grid;">
   <div class="ph-cell">
     <span class="ph-label">Purchase</span>
     <span class="ph-price ph-price-sale"><sup>$</sup>2,195,000</span>
@@ -948,12 +982,13 @@
 <section class="section">
   <h2 class="section-title">Imagery</h2>
   <div class="gallery-track" id="galleryTrack">
-    <div class="gallery-slide"><img src="images/exterior-front.jpg" alt="Front entrance" loading="lazy" /></div>
-    <div class="gallery-slide"><img src="images/exterior-front2C.jpg" alt="Front exterior" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/exterior-canal.jpg" alt="Venice Canal walkway view" loading="lazy" /></div>
+    <div class="gallery-slide"><img src="images/canal_birdseyeview.jpeg" alt="Howland Canal — bird's-eye view" loading="lazy" /></div>
+    <div class="gallery-slide"><img src="images/exterior-front.jpg" alt="Front entrance" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/kitchen-1.jpg" alt="Chef's kitchen — butcher block island" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/kitchen-2.jpg" alt="Kitchen — open layout toward living area" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/kitchen-3.jpg" alt="Kitchen — gas range, stainless appliances" loading="lazy" /></div>
+    <div class="gallery-slide"><img src="images/Dining-room.jpeg" alt="Dining area — open plan living" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/bathroom.jpg" alt="Bathroom — round mirror, granite vanity" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/bedroom.jpg" alt="Bedroom — warm wood tones, natural light" loading="lazy" /></div>
     <div class="gallery-slide"><img src="images/courtyard.jpg" alt="Private courtyard" loading="lazy" /></div>
@@ -987,7 +1022,7 @@
     </details>
     <details>
       <summary>How do I request a private showing?</summary>
-      <div class="faq-answer">Call or text <a href="tel:3104338281" style="color:var(--gold-text);font-weight:600;">310-433-8281</a>, email <a href="/cdn-cgi/l/email-protection#ee9d9a8b988b80ae9d9e8f8d8b9d8f808a8c8b9781808ac08d8183" style="color:var(--gold-text);font-weight:600;"><span class="__cf_email__" data-cfemail="4231362734272c02313223212731232c2620273b2d2c266c212d2f">[email&#160;protected]</span></a>, or use the form below.</div>
+      <div class="faq-answer">Call or text <a href="tel:3104338281" style="color:var(--gold-text);font-weight:600;">310-433-8281</a>, email <a href="mailto:steven&#64;spacesandbeyond&#46;com" style="color:var(--gold-text);font-weight:600;">steven&#64;spacesandbeyond&#46;com</a>, or use the form below.</div>
     </details>
     <details>
       <summary>What improvements have been made to the property in the past year?</summary>
@@ -1052,10 +1087,10 @@
     <div class="oh-row">
       <div class="oh-date-box">
         <span class="oh-month">Apr</span>
-        <span class="oh-day">19</span>
+        <span class="oh-day">6</span>
       </div>
       <div class="oh-info">
-        <div class="oh-dow">Saturday</div>
+        <div class="oh-dow">Monday</div>
         <div class="oh-time">12:00 PM – 3:00 PM</div>
       </div>
     </div>
@@ -1063,16 +1098,17 @@
     <div class="oh-row">
       <div class="oh-date-box">
         <span class="oh-month">Apr</span>
-        <span class="oh-day">20</span>
+        <span class="oh-day">7</span>
       </div>
       <div class="oh-info">
-        <div class="oh-dow">Sunday</div>
+        <div class="oh-dow">Tuesday</div>
         <div class="oh-time">12:00 PM – 3:00 PM</div>
       </div>
     </div>
 
   </div>
 </div>
+
 <div class="contact-form-section" style="padding-top:0; border-top:none;">
   <div style="display:none" class="lead-form-title">Request a Private Showing</div>
   <form id="leadForm" onsubmit="submitLead(event)">
@@ -1123,6 +1159,11 @@
       <label>Notes</label>
       <textarea name="notes" placeholder="Any questions or details you'd like us to know…"></textarea>
     </div>
+    <!-- ── HONEYPOT — invisible to humans, bots fill this in → submission silently dropped ── -->
+    <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden;pointer-events:none;" tabindex="-1">
+      <label for="_hp_website">Website</label>
+      <input type="text" id="_hp_website" name="_hp_website" tabindex="-1" autocomplete="off" value="" />
+    </div>
     <p style="font-family:var(--sans);font-size:12px;color:var(--blue-soft);text-align:center;line-height:1.6;margin-bottom:10px;letter-spacing:0.1px;">Showings are arranged by Steven Bettencourt. Coordination may also be handled by Hiram Santana (Spaces &amp; Beyond&reg; team).</p>
     <button type="submit" class="form-submit form-submit-upgraded">Schedule My Visit</button>
     <div class="form-msg" id="leadMsg"></div>
@@ -1140,7 +1181,7 @@
       <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
       Text
     </a>
-    <a href="/cdn-cgi/l/email-protection#8efdfaebf8ebe0cefdfeefedebfdefe0eaecebf7e1e0eaa0ede1e3b1fdfbece4ebedfab3babcb9abbcbec6e1f9e2efe0eaabbcbecdefe0efe2abbcbeabcbbcabb6beabb7bdabbcbec7e0fffbe7fcf7abbcbeabbcb8abbcbedde6e1f9e7e0e9abbcbedcebfffbebfdfa" class="btn btn-outline">
+    <a href="mailto:steven&#64;spacesandbeyond&#46;com" class="btn btn-outline">
       <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
       Email
     </a>
@@ -1156,7 +1197,7 @@
     </div>
     <div class="contact-row">
       <svg class="c-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-      <span class="c-text"><a href="/cdn-cgi/l/email-protection#f7848392819299b784879694928496999395928e989993d994989ac88482959d929483cac3c5c0d2c5c7bf98809b969993d2c5c7b49699969bd2c5c7d2b2c5d2cfc7d2cec4d2c5c7be9986829e858ed2c5c7d2c5c1d2c5c7a49f98809e9990d2c5c7a5928682928483"><span class="__cf_email__" data-cfemail="0c7f78697a69624c7f7c6d6f697f6d62686e6975636268226f6361">[email&#160;protected]</span></a></span>
+      <span class="c-text"><a href="mailto:steven&#64;spacesandbeyond&#46;com">steven&#64;spacesandbeyond&#46;com</a></span>
     </div>
     <div class="contact-row">
       <svg class="c-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -1186,11 +1227,11 @@
   </a>
   <button class="cta-schedule" onclick="document.getElementById('showing-anchor').scrollIntoView({behavior:'smooth'})">
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-    Schedule Visit
+    Request a Visit
   </button>
 </div>
 <!-- ── SCRIPTS ── -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // ── Gallery dots ────────────────────────────────
   (function() {
     var track = document.getElementById('galleryTrack');
@@ -1261,6 +1302,45 @@
       }
     }
   })();
+  // ── Bot / spam detection ───────────────────────
+  var _formLoadTime = Date.now();
+
+  function _isSpam(name, email, honeypot) {
+    // 1. Honeypot — real users never see or fill this field
+    if (honeypot && honeypot.trim() !== '') return true;
+
+    // 2. Timing gate — bots submit in under 2 seconds; humans can't
+    if (Date.now() - _formLoadTime < 2000) return true;
+
+    // 3. Name checks
+    var n = name.trim();
+    if (n.length < 5 || n.length > 60) return true;         // too short or absurdly long
+    if (n.indexOf(' ') === -1) return true;                  // must have at least first + last
+    if (/[bcdfghjklmnpqrstvwxyz]{5,}/i.test(n)) return true; // random consonant run (hVxDsVVx…)
+    // Mixed random case: >35% uppercase letters mixed with lowercase (hVxDs vs. "Steven B")
+    var upper = (n.match(/[A-Z]/g) || []).length;
+    var lower = (n.match(/[a-z]/g) || []).length;
+    if (upper >= 3 && lower >= 3 && upper / (upper + lower) > 0.38) return true;
+
+    // 4. Email checks
+    var local = (email.split('@')[0] || '').toLowerCase();
+    // Dot-obfuscation: too many dots in local part (a.k.e.l.a.c.er.o.m)
+    if ((local.match(/\./g) || []).length > 3) return true;
+    // Three or more single-character dot-segments (a.k.e or 4.3.3)
+    var segs = local.split('.');
+    if (segs.filter(function(s){ return s.length === 1; }).length >= 3) return true;
+    // Numbers embedded inside dot segments (m.4.3.3 pattern)
+    if (/(?:^|\.)\d+(?:\.|$)/.test(local) && segs.length > 3) return true;
+
+    // 5. Rate limiting — block same browser re-submitting within 60 s
+    try {
+      var last = parseInt(localStorage.getItem('_sb_ts') || '0', 10);
+      if (Date.now() - last < 60000) return true;
+    } catch(e) {}
+
+    return false;
+  }
+
   // ── Lead form submission ────────────────────────
   function submitLead(event) {
     event.preventDefault();
@@ -1268,13 +1348,28 @@
     var btn      = form.querySelector('button[type="submit"]');
     var msg      = document.getElementById('leadMsg');
     var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzwDoPosZ7712dn6QzfEADDgC1ARGgqAjp8nxUIt04BpIfMrq4FAQ2KqzHLzbt110o0hg/exec';
+    var nameVal     = form.elements['leadName'].value.trim();
+    var emailVal    = form.elements['email'].value.trim();
+    var honeypotVal = form.elements['_hp_website'] ? form.elements['_hp_website'].value : '';
+
+    // ── Spam gate: silently fake-success so bots don't retry ──────────
+    if (_isSpam(nameVal, emailVal, honeypotVal)) {
+      msg.textContent = 'Thank you — your request has been received. Steven or a member of the Spaces & Beyond® team will follow up shortly.';
+      msg.style.color = '#c5a56c';
+      form.reset();
+      return;
+    }
+
+    // ── Stamp rate-limit timestamp on clean submissions ───────────────
+    try { localStorage.setItem('_sb_ts', Date.now().toString()); } catch(e) {}
+
     btn.disabled    = true;
     btn.textContent = 'Sending…';
     var payload = {
       type:      'lead',
-      name:      form.elements['leadName'].value.trim(),
+      name:      nameVal,
       phone:     form.elements['phone'].value.trim(),
-      email:     form.elements['email'].value.trim(),
+      email:     emailVal,
       interest:  form.elements['interest'].value,
       bestDays:  Array.from(document.querySelectorAll('#dayPicker .day-btn.selected')).map(function(b){ return b.dataset.day; }).join(', '),
       notes:     form.elements['notes'].value.trim(),
