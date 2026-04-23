@@ -1016,27 +1016,27 @@
 <section class="section">
   <h2 class="section-title">FAQ</h2>
   <div class="faq-list">
-    <details>
+    <details data-faq-key="Is the property available to tour?">
       <summary>Is the property available to tour?</summary>
       <div class="faq-answer">Yes — private tours are available by appointment. Contact Steven to schedule.</div>
     </details>
-    <details>
+    <details data-faq-key="How do I request a private showing?">
       <summary>How do I request a private showing?</summary>
       <div class="faq-answer">Call or text <a href="tel:3104338281" style="color:var(--gold-text);font-weight:600;">310-433-8281</a>, email <a href="mailto:steven&#64;spacesandbeyond&#46;com" style="color:var(--gold-text);font-weight:600;">steven&#64;spacesandbeyond&#46;com</a>, or use the form below.</div>
     </details>
-    <details>
+    <details data-faq-key="What improvements have been made to the property in the past year?">
       <summary>What improvements have been made to the property in the past year?</summary>
       <div class="faq-answer">Recent upgrades include a new refrigerator, water heater, and roof, all installed within the past year.</div>
     </details>
-    <details>
+    <details data-faq-key="Are any incentives being offered with the purchase?">
       <summary>Are any incentives being offered with the purchase?</summary>
       <div class="faq-answer">Yes — incentives are available to qualified buyers and are presented during a private showing with Steven Bettencourt.</div>
     </details>
-    <details>
+    <details data-faq-key="Are utilities included in the lease?">
       <summary>Are utilities included in the lease?</summary>
       <div class="faq-answer">Utilities are not included in the lease. The tenant is responsible for all utility costs.</div>
     </details>
-    <details>
+    <details data-faq-key="Is the garage suitable for ADU conversion?">
       <summary>Is the garage suitable for ADU conversion?</summary>
       <div class="faq-answer">Yes, it is.</div>
     </details>
@@ -1087,7 +1087,7 @@
     <div class="oh-row">
       <div class="oh-date-box">
         <span class="oh-month">Apr</span>
-        <span class="oh-day">19</span>
+        <span class="oh-day">26</span>
       </div>
       <div class="oh-info">
         <div class="oh-dow">Saturday</div>
@@ -1098,10 +1098,21 @@
     <div class="oh-row">
       <div class="oh-date-box">
         <span class="oh-month">Apr</span>
-        <span class="oh-day">20</span>
+        <span class="oh-day">28</span>
       </div>
       <div class="oh-info">
-        <div class="oh-dow">Sunday</div>
+        <div class="oh-dow">Monday</div>
+        <div class="oh-time">12:00 PM – 3:00 PM</div>
+      </div>
+    </div>
+
+    <div class="oh-row">
+      <div class="oh-date-box">
+        <span class="oh-month">Apr</span>
+        <span class="oh-day">29</span>
+      </div>
+      <div class="oh-info">
+        <div class="oh-dow">Tuesday</div>
         <div class="oh-time">12:00 PM – 3:00 PM</div>
       </div>
     </div>
@@ -1111,7 +1122,7 @@
 
 <div class="contact-form-section" style="padding-top:0; border-top:none;">
   <div style="display:none" class="lead-form-title">Request a Private Showing</div>
-  <form id="leadForm" onsubmit="submitLead(event)">
+  <form id="leadForm" onsubmit="submitLead(event)" translate="no">
     <div class="form-row">
       <label>Your Name *</label>
       <input type="text" name="leadName" placeholder="First &amp; last name" required />
@@ -1128,16 +1139,16 @@
       <label>I Am Interested In</label>
       <div class="interest-pills">
         <div class="interest-pill">
-          <input type="radio" name="interest" id="ip-buy" value="Buying">
+          <input type="radio" name="interest" id="ip-buy" value="Buying" translate="no">
           <label for="ip-buy">
-            <span class="ip-price">$2,195,000</span>
+            <span class="ip-price" translate="no">$2,195,000</span>
             <span class="ip-lbl">Purchasing</span>
           </label>
         </div>
         <div class="interest-pill">
-          <input type="radio" name="interest" id="ip-lease" value="Leasing">
+          <input type="radio" name="interest" id="ip-lease" value="Leasing" translate="no">
           <label for="ip-lease">
-            <span class="ip-price">$7,000/mo</span>
+            <span class="ip-price" translate="no">$7,000/mo</span>
             <span class="ip-lbl">Leasing</span>
           </label>
         </div>
@@ -1268,8 +1279,14 @@
     document.querySelectorAll('details').forEach(function(el) {
       el.addEventListener('toggle', function() {
         if (this.open) {
-          var q = this.querySelector('summary');
-          logEvent('FAQ Viewed', q ? q.textContent.trim() : 'FAQ opened', null);
+          // Use data-faq-key (fixed English) so translated browsers
+          // don't send foreign-language question text to the sheet
+          var key = this.dataset.faqKey;
+          if (!key) {
+            var q = this.querySelector('summary');
+            key = q ? q.textContent.trim() : 'FAQ opened';
+          }
+          logEvent('FAQ Viewed', key, null);
         }
       });
     });
